@@ -1,4 +1,17 @@
 #Member 1
+# Raw Dataset Storage
+RAW_WEATHER_DATA = [
+    {"station": "Nairobi North", "temp": 22.5, "rainfall": 12.0, "humidity": 65, "wind_speed": 14.2},
+    {"station": "Mombasa Port", "temp": 32.0, "rainfall": 0.0, "humidity": 85, "wind_speed": 18.5},
+    {"station": "Eldoret High", "temp": 14.5, "rainfall": 25.4, "humidity": 78, "wind_speed": 8.0},
+    {"station": "Nakuru Central", "temp": 28.1, "rainfall": 5.2, "humidity": 55, "wind_speed": 11.3},
+    {"station": "Kisumu Bay", "temp": 33.5, "rainfall": -2.0, "humidity": 90, "wind_speed": 15.0},      # Invalid: Negative rainfall
+    {"station": "Garissa Station", "temp": 55.0, "rainfall": 0.0, "humidity": 30, "wind_speed": 22.1},    # Invalid: Temp > 50°C
+    {"station": "Nyeri Hill", "temp": 18.0, "rainfall": 10.0, "humidity": 105, "wind_speed": 6.5},        # Invalid: Humidity > 100%
+    {"station": "Machakos East", "temp": 26.4, "rainfall": 1.5, "humidity": 60, "wind_speed": -4.0},      # Invalid: Negative wind speed
+    {"station": "Lodwar Outpost", "temp": 36.8, "rainfall": 0.0, "humidity": 25, "wind_speed": 20.0},
+    {"station": "Nairobi North", "temp": 19.0, "rainfall": 45.0, "humidity": 80, "wind_speed": 10.0},
+]
 #Member 2
 def validate_record(record):
     """
