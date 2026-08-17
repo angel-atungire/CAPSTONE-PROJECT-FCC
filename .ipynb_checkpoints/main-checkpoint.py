@@ -68,65 +68,6 @@ def view_invalid_records(invalid_records):
         for reason in reasons:
             print(f"     - {reason}")
 #Member 1
-def view_valid_readings(valid_records):
-    """Option 1: View valid weather readings in formatted tabular form."""
-    print("\n--- VALID WEATHER READINGS ---")
-    if not valid_records:
-        print("No valid records found.")
-        return
-
-    header = f"{'Station':<18} | {'Temp (°C)':<10} | {'Rain (mm)':<10} | {'Humidity (%)':<12} | {'Wind (km/h)':<10}"
-    print(header)
-    print("-" * len(header))
-
-    for r in valid_records:
-        print(f"{r['station']:<18} | {r['temp']:<10.1f} | {r['rainfall']:<10.1f} | {r['humidity']:<12} | {r['wind_speed']:<10.1f}")
-
-
 #Member 3
 #Member 4
 #Member 1
-def display_menu():
-    """Displays the interactive menu choices."""
-    print("\n========================================")
-    print("   WEATHER OBSERVATION ANALYSIS TOOL    ")
-    print("========================================")
-    print("1. View valid readings")
-    print("2. Analyse weather")
-    print("3. Search by station")
-    print("4. View temperature classifications")
-    print("5. View invalid records")
-    print("6. View summary")
-    print("7. Exit")
-    print("========================================")
-
-
-def main():
-    # Pre-process raw records on startup
-    valid_records, invalid_records = process_dataset(RAW_WEATHER_DATA)
-
-    while True:
-        display_menu()
-        choice = input("Select an option (1-7): ").strip()
-
-        if choice == "1":
-            view_valid_readings(valid_records)
-        elif choice == "2":
-            analyse_weather(valid_records)
-        elif choice == "3":
-            search_by_station(valid_records, invalid_records)
-        elif choice == "4":
-            view_temperature_classifications(valid_records)
-        elif choice == "5":
-            view_invalid_records(invalid_records)
-        elif choice == "6":
-            view_summary(valid_records, invalid_records)
-        elif choice == "7":
-            print("\nExiting program. Goodbye!")
-            break
-        else:
-            print("\n[ERROR] Invalid selection. Please choose a number between 1 and 7.")
-
-
-if __name__ == "__main__":
-    main()
