@@ -84,6 +84,46 @@ def view_valid_readings(valid_records):
 
 
 #Member 3
+def analyse_weather(valid_records):
+    """Option 2: Calculate averages, extrema, peak rainfall, and high temp count."""
+    print("\n--- WEATHER ANALYSIS ---")
+    if not valid_records:
+        print("Cannot perform analysis: No valid records available.")
+        return
+
+    n = len(valid_records)
+    avg_temp = sum(r["temp"] for r in valid_records) / n
+    avg_rain = sum(r["rainfall"] for r in valid_records) / n
+    avg_hum = sum(r["humidity"] for r in valid_records) / n
+    avg_wind = sum(r["wind_speed"] for r in valid_records) / n
+
+    highest_temp_rec = max(valid_records, key=lambda r: r["temp"])
+    lowest_temp_rec = min(valid_records, key=lambda r: r["temp"])
+    max_rain_rec = max(valid_records, key=lambda r: r["rainfall"])
+    above_30_count = sum(1 for r in valid_records if r["temp"] > 30)
+
+    print(f"Average Temperature : {avg_temp:.2f}°C")
+    print(f"Average Rainfall    : {avg_rain:.2f} mm")
+    print(f"Average Humidity    : {avg_hum:.2f}%")
+    print(f"Average Wind Speed  : {avg_wind:.2f} km/h")
+    print(f"Highest Temperature : {highest_temp_rec['temp']}°C (Station: {highest_temp_rec['station']})")
+    print(f"Lowest Temperature  : {lowest_temp_rec['temp']}°C (Station: {lowest_temp_rec['station']})")
+    print(f"Highest Rainfall    : {max_rain_rec['rainfall']} mm (Station: {max_rain_rec['station']})")
+    print(f"Readings > 30°C     : {above_30_count}")
+
+
+def view_summary(valid_records, invalid_records):
+    """Option 6: View dataset processing summary overview."""
+    print("\n--- DATASET SUMMARY OVERVIEW ---")
+    total_records = len(valid_records) + len(invalid_records)
+    if total_records == 0:
+        print("No dataset loaded.")
+        return
+
+    print(f"Total Records Processed : {total_records}")
+    print(f"Valid Records           : {len(valid_records)} ({len(valid_records)/total_records*100:.1f}%)")
+    print(f"Invalid Records         : {len(invalid_records)} ({len(invalid_records)/total_records*100:.1f}%)")
+
 #Member 4
 def view_temperature_classifications(valid_records):
     """Option 4: Classify temperatures as Cold (<20°C), Moderate (20–30°C), or Hot (>30°C)."""
