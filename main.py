@@ -85,6 +85,65 @@ def view_valid_readings(valid_records):
 
 #Member 3
 #Member 4
+def view_temperature_classifications(valid_records):
+    """Option 4: Classify temperatures as Cold (<20°C), Moderate (20–30°C), or Hot (>30°C)."""
+    print("\n--- TEMPERATURE CLASSIFICATIONS ---")
+    if not valid_records:
+        print("No valid records to classify.")
+        return
+
+    counts = {"Cold (<20°C)": 0, "Moderate (20–30°C)": 0, "Hot (>30°C)": 0}
+    classified_details = {"Cold (<20°C)": [], "Moderate (20–30°C)": [], "Hot (>30°C)": []}
+
+    for r in valid_records:
+        t = r["temp"]
+        if t < 20:
+            category = "Cold (<20°C)"
+        elif 20 <= t <= 30:
+            category = "Moderate (20–30°C)"
+        else:
+            category = "Hot (>30°C)"
+
+        counts[category] += 1
+        classified_details[category].append(f"{r['station']} ({t}°C)")
+
+    print("\nClassification Summary:")
+    for cat, count in counts.items():
+        print(f"  • {cat:<18}: {count} reading(s)")
+
+    print("\nDetailed Breakdown:")
+    for cat, stations in classified_details.items():
+        stations_str = ", ".join(stations) if stations else "None"
+        print(f"  • {cat:<18}: {stations_str}")
+
+
+def search_by_station(valid_records, invalid_records):
+    """Option 3: Search for a station and display its valid and invalid records."""
+    print("\n--- SEARCH BY STATION ---")
+    query = input("Enter station name to search: ").strip().lower()
+
+    if not query:
+        print("Search query cannot be empty.")
+        return
+
+    found_valid = [r for r in valid_records if query in r["station"].lower()]
+    found_invalid = [r for r, _ in invalid_records if query in r["station"].lower()]
+
+    if not found_valid and not found_invalid:
+        print(f"No records matching '{query}' were found.")
+        return
+
+    if found_valid:
+        print(f"\nValid Records Found ({len(found_valid)}):")
+        for r in found_valid:
+            print(f"  • {r['station']}: Temp={r['temp']}°C, Rain={r['rainfall']}mm, Humidity={r['humidity']}%, Wind={r['wind_speed']}km/h")
+
+    if found_invalid:
+        print(f"\nInvalid Records Found ({len(found_invalid)}):")
+        for r, reasons in [item for item in invalid_records if query in item[0]["station"].lower()]:
+            print(f"  • {r['station']}: Temp={r['temp']}°C | Rejections: {', '.join(reasons)}")
+
+
 #Member 1
 def display_menu():
     """Displays the interactive menu choices."""
