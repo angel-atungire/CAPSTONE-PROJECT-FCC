@@ -40,3 +40,4 @@ This program is a modular,menu-driven Python application designed to process wea
 ## 4.Execution
 Run using standard Python 3:
 ```bash
+python main.py
